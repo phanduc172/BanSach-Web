@@ -31,17 +31,17 @@
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <ul class="nav navbar-nav">
-	      <li class="active"><a href="TrangChu.jsp">Trang chủ</a></li>
+	      <li class="active"><a href="HienThiSach.jsp">Trang chủ</a></li>
 	      <li><a href="DatHang.jsp">Giỏ hàng</a></li>
 	      <li><a href="ThanhToan.jsp">Thanh toán</a></li>
    	      <li><a href="LichSuMuaHang.jsp">Lịch sử mua hàng</a></li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
 	      <li class="modal-title"><a href="DangKy.jsp"><span class="glyphicon glyphicon-user"></span> Đăng ký </a></li>
-
-	      <li class="modal-title">
+	      <%if(session.getAttribute("dn")==null) { %>
+	      	<li class="modal-title">
 	      	<!-- Trigger the modal with a button -->
-			<button style="background: none;border: none;color: white;padding: 15px;" type="button" class="" data-toggle="modal" data-target="#myModal">
+			<button style="background: none;border: none;color: #9d9d9d;padding: 15px;" type="button" class="" data-toggle="modal" data-target="#myModal">
 			<span class="glyphicon glyphicon-user"></span> Đăng nhập</button>
 		  <!-- Modal -->
 		  <div class="modal fade" id="myModal" role="dialog">
@@ -61,12 +61,8 @@
 		        </div>
 		      </div>
 	      </li>
-
-	      <%if(session.getAttribute("dn")==null) { %>
-	      	<li><a href="DangNhap.jsp"><span class="glyphicon glyphicon-user"></span>Đăng nhập <br></a></li>
 	      <% } else { %>
 	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=session.getAttribute("dn")%> </a></li>
-
 	     	 <li><a href="DangXuat.jsp"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất </a></li>
       	<%}%>
 	    </ul>
