@@ -37,16 +37,33 @@
    	      <li><a href="LichSuMuaHang.jsp">Lịch sử mua hàng</a></li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
-	      <li><a href="DangKy.jsp"><span class="glyphicon glyphicon-user"></span> Đăng ký </a></li>
+	      <li class="modal-title"><a href="DangKy.jsp"><span class="glyphicon glyphicon-user"></span> Đăng ký </a></li>
+
+	      <li class="modal-title">
+	      	<!-- Trigger the modal with a button -->
+			<button style="background: none;border: none;color: white;padding: 15px;" type="button" class="" data-toggle="modal" data-target="#myModal">
+			<span class="glyphicon glyphicon-user"></span> Đăng nhập</button>
+		  <!-- Modal -->
+		  <div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog">
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Đăng nhập</h4>
+		        </div>
+		        <div class="modal-body">
+               		<form method="post" action="DangNhap.jsp" >
+                        Tài khoản: <input type="text" name="username" > <br>
+                        Mật khẩu: <input type="password" name="password"> <br>
+                        <input type="submit" name="but" value="Đăng nhập">
+                    </form>
+		        </div>
+		      </div>
+	      </li>
+
 	      <%if(session.getAttribute("dn")==null) { %>
-	      	<li><a href="DangNhap.jsp"><span class="glyphicon glyphicon-user"></span>
-
-
-
-	      	Đăng nhập
-
-
-	      	</a></li>
+	      	<li><a href="DangNhap.jsp"><span class="glyphicon glyphicon-user"></span>Đăng nhập <br></a></li>
 	      <% } else { %>
 	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=session.getAttribute("dn")%> </a></li>
 
