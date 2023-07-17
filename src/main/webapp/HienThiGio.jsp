@@ -1,3 +1,5 @@
+<%@page import="bean.giohangbean"%>
+<%@page import="bo.giohangbo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="bean.sachbean"%>
 <%@page import="bo.sachbo"%>
@@ -32,7 +34,7 @@
 	  <div class="container-fluid">
 	    <ul class="nav navbar-nav">
 	      <li class="active"><a href="HienThiSach.jsp">Trang chủ</a></li>
-	      <li><a href="HienThiGio.jsp">Giỏ hàng</a></li>
+	      <li><a href="GioHang.jsp">Giỏ hàng</a></li>
 	      <li><a href="ThanhToan.jsp">Thanh toán</a></li>
    	      <li><a href="LichSuMuaHang.jsp">Lịch sử mua hàng</a></li>
 	    </ul>
@@ -74,51 +76,55 @@
 			<td width="200" align="center" valign="top">
 			<h4 class="mt-3">Hiển thị sách</h4>
 				<table class="table table-dark table-hover">
-					<%loaibo lbo = new loaibo();
-					for(loaibean loai: lbo.getloai()) {%>
-						<tr>
-							<td>
-								<a href="HienThiSach.jsp?ml=<%=loai.getMaloai()%>">
-									<%=loai.getTenloai()%>
-								</a>
-							</td>
-						</tr>
-					<%}%>
+					<%
+					loaibo lbo = new loaibo();
+					ArrayList<loaibean> dsloai = lbo.getloai();
+					for (loaibean l : dsloai) {
+					%>
+					<tr>
+						<td><a href="HienThiSach.jsp?ml=<%=l.getMaloai()%>"> <%=l.getTenloai()%>
+						</a></td>
+					</tr>
+					<%
+					}
+					%>
 				</table>
 			</td>
 
 			<td width="700" align="center" valign="top">
 				<table class="table table-dark table-hover row">
-				<h4 class="mt-3">Hiển thị sách</h4>
-				<%
-					response.setCharacterEncoding("utf-8");
-					request.setCharacterEncoding("utf-8");
-					sachbo sbo = new sachbo();
-					ArrayList<sachbean> ds = sbo.getsach();
-					String ml = request.getParameter("ml");
-					String key = request.getParameter("txttim");
-					if(ml!=null) //Chọn tên loại
-						ds=sbo.timMa(ml);
-					else
-						if(key!=null)
-							ds=sbo.tim(key);
-					for(sachbean sach: ds) { %>
-						<tr class="col-sm-4" align="center">
-							<td>
-								<img height="180" alt="" src="<%=sach.getAnh()%>"> <br>
+				<h4 class="mt-3">Giỏ sách</h4>
 
-								Tên sách: <a href="HienThiSach.jsp?ml=<%=sach.getMasach()%>">
-									<%=sach.getTensach()%><br>
-								</a>
-								<a href="GioHang.jsp?ms=<%=sach.getMasach()%>&ts=<%=sach.getTensach()%>&gia=<%=sach.getGia()%>">
-								<img src="mua.jpg"> </a>
-								<br>
-								Tác giả: <%=sach.getTacgia()%> <br>
-								Giá bán: <%=sach.getGia()%>
-							</td>
-						</tr>
-					<%}%>
+				<table class="table table-hover">
+					<%
+					giohangbo gh = (giohangbo) session.getAttribute("gio");
+					long tongtien = 0;
+					if (gh != null) {
+					  for (giohangbean h : gh.ds) {
+					%>
+					<tr>
+						<img height="180" alt="" src="<%=h.getClass()%>">
+						<td><%=h.getMasach()%></td>
+						<td><%=h.getTensach()%></td>
+						<td><%=h.getGia()%></td>
+						<td><%=h.getSoluong()%></td>
+						<td>
+							<form action="suaxoa.jsp?ms=<%=h.getMasach()%>" method="post">
+								<input name="txtsl" type="number" min="0" style="width: 50px;">
+								<input name="btnsua" type="submit" value="Cập nhật"> <input
+									name="btnxoa" type="submit" value="Xóa">
+							</form>
+						</td>
+						<td><%=h.getThanhtien()%></td>
+					</tr>
+
+					<%
+					tongtien += h.getThanhtien();
+					}
+				}
+				%>
 				</table>
+
 			</td>
 
 			<td width="200" align="center" valign="top">

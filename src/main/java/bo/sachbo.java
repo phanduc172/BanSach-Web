@@ -33,4 +33,7 @@ public class sachbo {
 				tam.add(s);
 		return tam;
 	}
+
+	//Viết hàm thêm các mặt hàng vào giỏ hàng
+
 }
