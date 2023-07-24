@@ -12,23 +12,24 @@
 <body>
 	<body>
 	<%
-		String masach = request.getParameter("ms");
-		String tensach = request.getParameter("ts");
-		long gia = Long.parseLong(request.getParameter("gia"));
-		giohangbo gh;
-		if (session.getAttribute("gio") == null) { //neu mua lan dau
-		  gh = new giohangbo();
-		  session.setAttribute("gio", gh);//cap phat gio
-		}
-		//b1: gan sesion vao bien
-		gh = (giohangbo) session.getAttribute("gio");
-		//b2: thao tac tren bien
-		gh.Them(masach, tensach, gia, (long) 1);
-		//b3: luu bien vao sesion
+// 		String masach = request.getParameter("ms");
+// 		String tensach = request.getParameter("ts");
+// 		long gia = Long.parseLong(request.getParameter("gia"));
+// 		giohangbo gh;
+// 		if (session.getAttribute("gio") == null) { //neu mua lan dau
+// 			  gh = new giohangbo();
+// 			  session.setAttribute("gio", gh);//cap phat gio
+// 			}
+// 		//b1: gan sesion vao bien
+// 		gh = (giohangbo) session.getAttribute("gio");
+// 		//b2: thao tac tren bien
+// 		gh.Them(masach, tensach, gia, (long) 1);
+// 		//b3: luu bien vao sesion
 
-		session.setAttribute("gio", gh);
-		session.setAttribute("slsp", gh.ds.size());
-		response.sendRedirect("HienThiGio.jsp");
+// 		session.setAttribute("gio", gh);
+// 		session.setAttribute("slsp", gh.ds.size());
+
+// 		response.sendRedirect("HienThiGio.jsp");
 	%>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

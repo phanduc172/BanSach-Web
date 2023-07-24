@@ -9,7 +9,7 @@
 <body>
 	<%
 		session.removeAttribute("dn") ;
-		response.sendRedirect("HienThiSach.jsp");
+		response.sendRedirect("SachController");
 	%>
 </body>
 </html>
