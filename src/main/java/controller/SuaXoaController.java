@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +43,9 @@ public class SuaXoaController extends HttpServlet {
         }
 
         session.setAttribute("gio", gh);
-        response.sendRedirect("HienThiGio.jsp");
+
+        RequestDispatcher rd = request.getRequestDispatcher("HienThiGio.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

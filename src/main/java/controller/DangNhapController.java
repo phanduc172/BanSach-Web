@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.loaibean;
+import bean.khachhangbean;
+import bo.khachhangbo;
 
 /**
  * Servlet implementation class DangNhapController
@@ -36,27 +35,29 @@ public class DangNhapController extends HttpServlet {
        try {
     	   response.setCharacterEncoding("utf-8");
            request.setCharacterEncoding("utf-8");
-   		String un = request.getParameter("username");
-   		String pass = request.getParameter("password");
-   		if(un==null && pass==null) {
-   			RequestDispatcher rd = request.getRequestDispatcher("SachController");
-   			rd.forward(request, response);
-   		} else {
-   			if(un.equals("abc")&&pass.equals("123")) {
-   				HttpSession session = request.getSession();
-   				session.setAttribute("dn",un);
-   				//Điều ướng sang SachController
-   				RequestDispatcher rd = request.getRequestDispatcher("SachController");
-   				rd.forward(request, response);
-   			} else {
-   				RequestDispatcher rd = request.getRequestDispatcher("SachController?tb=DangNhapSai");
-   				rd.forward(request, response);
-   			}
-   		}
-	} catch (Exception e) {
-		// TODO: handle exception
-		e.printStackTrace();
-	}
+	   		String un = request.getParameter("username");
+	   		String pass = request.getParameter("password");
+   			khachhangbo khbo = new khachhangbo();
+	   		if(un==null && pass==null) {
+	   			RequestDispatcher rd = request.getRequestDispatcher("SachController");
+	   			rd.forward(request, response);
+	   		} else {
+	   			khachhangbean kh = khbo.DangNhapController(un, pass);
+	   			if(kh !=null) {
+	   				HttpSession session = request.getSession();
+	   				session.setAttribute("dn",un);
+	   				//Điều ướng sang SachController
+	   				RequestDispatcher rd = request.getRequestDispatcher("SachController");
+	   				rd.forward(request, response);
+	   			} else {
+	   				RequestDispatcher rd = request.getRequestDispatcher("SachController?tb=DangNhapSai");
+	   				rd.forward(request, response);
+	   			}
+	   		}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	/**

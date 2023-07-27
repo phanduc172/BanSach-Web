@@ -58,12 +58,51 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="SachController">Trang chủ</a></li>
                 <li><a href="GioHangController">Giỏ hàng <span style="color:red;">(<%=gh.TongSLSach()%>)</span></a></li>
-                <li><a href="ThanhToan.jsp">Thanh toán</a></li>
-                <li><a href="LichSuMuaHang.jsp">Lịch sử mua hàng</a></li>
+                <li><a href="XacNhanController">Xác nhận đặt mua</a></li>
+                <li><a href="LichSuMuaController">Lịch sử mua hàng</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 	      <% if (session.getAttribute("dn") == null) { %>
-		    <li class="modal-title"><a href="DangKy.jsp"><span class="glyphicon glyphicon-user"></span> Đăng ký </a></li>
+	      	<li class="modal-title">
+	      	<!-- Trigger the modal with a button -->
+			<button style="background: none;border: none;color: #9d9d9d;padding: 15px;" type="button" class="" data-toggle="modal" data-target="#myModalRegister">
+			<span class="glyphicon glyphicon-user"></span> Đăng ký</button>
+		  <!-- Modal -->
+		  <div class="modal fade" id="myModalRegister" role="dialog">
+		    <div class="modal-dialog">
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Đăng ký</h4>
+		        </div>
+		        <div class="modal-body">
+               		<form method="post" action="DangKyController">
+                    <fieldset>
+			    	  	<div class="form-group">
+			    		    <input class="form-control" placeholder="Họ tên" name="hoten" type="text">
+			    		</div>
+                        <div class="form-group">
+			    		    <input class="form-control" placeholder="Địa chỉ" name="diachi" type="text">
+			    		</div>
+                        <div class="form-group">
+			    		    <input class="form-control" placeholder="Số điện thoại" name="sodt" type="text">
+			    		</div>
+                        <div class="form-group">
+			    		    <input class="form-control" placeholder="Email" name="email" type="email">
+			    		</div>
+                        <div class="form-group">
+			    		    <input class="form-control" placeholder="Tên đăng nhập" name="tendn" type="text">
+			    		</div>
+			    		<div class="form-group">
+			    			<input class="form-control" placeholder="Nhập mật khẩu" name="pass" type="password" value="">
+			    		</div>
+			    		<input class="btn btn-lg btn-primary btn-block" type="submit" value="Đăng ký">
+			    	</fieldset>
+			      	</form>
+		        </div>
+		      </div>
+	      </li>
 		<% } %>
 	      <%if(session.getAttribute("dn")==null) { %>
 	      	<li class="modal-title">
@@ -141,9 +180,9 @@
 
 						<%ArrayList<sachbean> dsach = (ArrayList)request.getAttribute("dssach");%>
 						<%for(sachbean sach: dsach) { %>
-							<tr class="col-sm-6" align="center">
-								<td>
-									<img height="220" alt="" src="<%=sach.getAnh()%>"> <br>
+							<tr class="col-sm-6 item-book" align="center">
+								<td width="210" height="380">
+									<img width="180"  alt="" src="<%=sach.getAnh()%>"> <br>
 
 									Tên sách: <a href="SachController?ml=<%=sach.getMasach()%>">
 										<%=sach.getTensach()%><br>

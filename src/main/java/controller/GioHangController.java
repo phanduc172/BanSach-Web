@@ -1,9 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,12 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.giohangbean;
-import bean.loaibean;
-import bean.sachbean;
 import bo.giohangbo;
-import bo.loaibo;
-import bo.sachbo;
 
 /**
  * Servlet implementation class GioHangController
@@ -51,7 +44,7 @@ public class GioHangController extends HttpServlet {
 		if (session.getAttribute("gio") == null) { //neu mua lan dau
 			  gh = new giohangbo();
 			  session.setAttribute("gio", gh);//cap phat gio
-}
+		}
 
 		if(masach!=null && tensach!=null && giaStr!=null) {
 			gia = Long.parseLong(giaStr);
@@ -64,10 +57,14 @@ public class GioHangController extends HttpServlet {
 			session.setAttribute("gio", gh);
 			session.setAttribute("slsp", gh.ds.size());
 
-			response.sendRedirect("HienThiGio.jsp");
+//			RequestDispatcher rd = request.getRequestDispatcher("HienThiGio.jsp");
+//			rd.forward(request, response);
+			response.sendRedirect("HienThiGioController");
 
 		} else {
-			response.sendRedirect("HienThiGio.jsp");
+//			RequestDispatcher rd = request.getRequestDispatcher("HienThiGio.jsp");
+//			rd.forward(request, response);
+			response.sendRedirect("HienThiGioController");
 		}
 
     }

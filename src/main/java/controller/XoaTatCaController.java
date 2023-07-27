@@ -40,7 +40,7 @@ public class XoaTatCaController extends HttpServlet {
         }
 
         // Chuyển hướng đến trang hiển thị giỏ hàng
-        response.sendRedirect("SachController");
+        response.sendRedirect("GioHangController");
 	}
 
 	/**

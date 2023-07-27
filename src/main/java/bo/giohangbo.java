@@ -2,8 +2,6 @@ package bo;
 
 import java.util.ArrayList;
 
-import org.apache.jasper.tagplugins.jstl.core.Remove;
-
 import bean.giohangbean;
 
 public class giohangbo {
