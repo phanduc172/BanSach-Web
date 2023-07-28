@@ -1,3 +1,4 @@
+<%@page import="bo.khachhangbo"%>
 <%@page import="bean.khachhangbean"%>
 <%@page import="bo.giohangbo"%>
 <%@page import="java.util.ArrayList"%>
@@ -28,6 +29,10 @@
 		%>
 		<%
         khachhangbean khachhang = (khachhangbean) session.getAttribute("ktdn");
+		if(khachhang==null) {
+			khachhang = new khachhangbean();
+			session.setAttribute("ktdn", khachhang);
+		}
    		 %>
 	<%
 	giohangbo gh = (giohangbo) session.getAttribute("gio");
@@ -63,7 +68,7 @@
                 <li class="active"><a href="SachController">Trang chủ</a></li>
                 <li><a href="GioHangController">Giỏ hàng <span style="color:red;">(<%=gh.TongSLSach()%>)</span></a></li>
                 <li><a href="XacNhanController">Xác nhận đặt mua</a></li>
-                <li><a href="LichSuMua.jsp">Lịch sử mua hàng</a></li>
+                <li><a href="LichSuMuaController">Lịch sử mua hàng</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 	      <% if (session.getAttribute("dn") == null) { %>

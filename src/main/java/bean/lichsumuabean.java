@@ -1,7 +1,7 @@
 package bean;
 
 public class lichsumuabean {
-	private long macthd;
+	private long MaChiTietHD;
 	private long makh;
     private String hoten;
     private String tensach;
@@ -11,10 +11,10 @@ public class lichsumuabean {
 	public lichsumuabean() {
 		super();
 	}
-	public lichsumuabean(long macthd, long makh, String hoten, String tensach, long gia, long soluongmua,
+	public lichsumuabean(long MaChiTietHD, long makh, String hoten, String tensach, long gia, long soluongmua,
 			String ngaymua) {
 		super();
-		this.macthd = macthd;
+		this.MaChiTietHD = MaChiTietHD;
 		this.makh = makh;
 		this.hoten = hoten;
 		this.tensach = tensach;
@@ -23,10 +23,10 @@ public class lichsumuabean {
 		this.ngaymua = ngaymua;
 	}
 	public long getMacthd() {
-		return macthd;
+		return MaChiTietHD;
 	}
-	public void setMacthd(long macthd) {
-		this.macthd = macthd;
+	public void setMacthd(long MaChiTietHD) {
+		this.MaChiTietHD = MaChiTietHD;
 	}
 	public long getMakh() {
 		return makh;

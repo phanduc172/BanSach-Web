@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.khachhangbean;
 import bean.lichsumuabean;
 import bo.lichsumuabo;
 
@@ -29,21 +30,28 @@ public class LichSuMuaController extends HttpServlet {
             response.setCharacterEncoding("utf-8");
             request.setCharacterEncoding("utf-8");
 
-            // Lấy mã khách hàng từ session (bạn có thể thay thế bằng cách truyền mã khách hàng từ nguồn khác)
-            long makh = (long) session.getAttribute("makh");
+            // Kiểm tra đăng nhập
+            khachhangbean kh = (khachhangbean) session.getAttribute("ktdn");
+            if (kh == null) {
+                response.sendRedirect("SachController");
+            } else {
+                // Lấy mã khách hàng từ session
+                long makh = kh.getMakh();
 
-            // Lấy danh sách lịch sử mua hàng từ database
-            lichsumuabo lsmBo = new lichsumuabo();
-            List<lichsumuabean> listLsm = lsmBo.getLichSuMua(makh);
+                // Sử dụng BO để lấy danh sách lịch sử mua hàng
+                lichsumuabo lsmBo = new lichsumuabo();
+                List<lichsumuabean> listLsm = lsmBo.getLichSuMua(makh);
 
-            // Đặt danh sách lịch sử mua hàng vào thuộc tính của request
-            request.setAttribute("listLsm", listLsm);
+                // Đưa danh sách lịch sử mua hàng vào thuộc tính request để hiển thị trên JSP
+                request.setAttribute("listLsm", listLsm);
 
-            // Chuyển tiếp request và response đến trang JSP để hiển thị thông tin lịch sử mua hàng
-            RequestDispatcher rd = request.getRequestDispatcher("LichSuMua.jsp");
-            rd.forward(request, response);
+                // Chuyển hướng đến trang LichSuMua.jsp
+                RequestDispatcher rd = request.getRequestDispatcher("LichSuMua.jsp");
+   				rd.forward(request, response);
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
             response.sendRedirect("TrangLoi.jsp");
         }
     }

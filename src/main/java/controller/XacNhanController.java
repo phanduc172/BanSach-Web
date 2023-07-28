@@ -56,7 +56,8 @@ public class XacNhanController extends HttpServlet {
                 	}
                 	//Xóa giỏ hàng
                 	session.removeAttribute("gio");
-                	response.sendRedirect("LichSuMua.jsp");
+                	RequestDispatcher rd = request.getRequestDispatcher("LichSuMua.jsp");
+                    rd.forward(request, response);
             	}
             }
 		} catch (Exception e) {

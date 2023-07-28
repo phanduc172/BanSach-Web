@@ -29,20 +29,9 @@
 			gh = new giohangbo();
 			session.setAttribute("gio",gh);
 		}
-
-// 		String un = request.getParameter("username");
-// 		String pass = request.getParameter("password");
-// 		if(un!=null && pass!=null)
-// 			if(un.equals("abc") && pass.equals("123")) {
-// 				response.sendRedirect("HienThiSach.jsp");
-// 			} else {
-// 				response.sendRedirect("DangNhap.jsp?tb=DangNhapSai");
-// 			}
 	%>
-
 	<%
 		giohangbo ghbo = (giohangbo) session.getAttribute("gio");
-
 		// Kiểm tra nếu có thông tin sản phẩm được thêm vào giỏ hàng từ trang HienThiSach.jsp
 		String masach = request.getParameter("ms");
 		String tensach = request.getParameter("ts");
