@@ -46,12 +46,15 @@ public class DangNhapController extends HttpServlet {
 	   			if(kh !=null) {
 	   				HttpSession session = request.getSession();
 	   				session.setAttribute("dn",un);
+	   				session.setAttribute("ktdn", kh);
 	   				//Điều ướng sang SachController
-	   				RequestDispatcher rd = request.getRequestDispatcher("SachController");
-	   				rd.forward(request, response);
+	   				response.sendRedirect("SachController");
+//	   				RequestDispatcher rd = request.getRequestDispatcher("SachController");
+//	   				rd.forward(request, response);
 	   			} else {
-	   				RequestDispatcher rd = request.getRequestDispatcher("SachController?tb=DangNhapSai");
-	   				rd.forward(request, response);
+	   				response.sendRedirect("SachController?tb=DangNhapSai");
+//	   				RequestDispatcher rd = request.getRequestDispatcher("SachController?tb=DangNhapSai");
+//	   				rd.forward(request, response);
 	   			}
 	   		}
 		} catch (Exception e) {

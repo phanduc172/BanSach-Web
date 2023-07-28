@@ -6,7 +6,7 @@ import dao.khachhangdao;
 public class khachhangbo {
 	khachhangdao khdao = new khachhangdao();
 	public khachhangbean DangNhapController(String tendn, String pass) throws Exception {
-		return khdao.ktdn(tendn, pass);
+		return khdao.DangNhapController(tendn, pass);
 	}
 
 

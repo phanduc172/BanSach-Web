@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,26 +41,28 @@ public class XacNhanController extends HttpServlet {
             response.setCharacterEncoding("utf-8");
             request.setCharacterEncoding("utf-8");
 
-            khachhangbean kh = (khachhangbean)session.getAttribute("dn");
+            khachhangbean kh = (khachhangbean) session.getAttribute("ktdn");
             if(kh==null) {
-    			RequestDispatcher rd = request.getRequestDispatcher("SachController");
-    			rd.forward(request, response);
+    			response.sendRedirect("SachController");
             } else {
-            	hoadonbo hdbo = new hoadonbo();
-            	chitiethoadonbo ctbo = new chitiethoadonbo();
-            	hdbo.Them(kh.getMakh());
-            	long maxhd = hdbo.MaxHD();
-            	giohangbo gh = (giohangbo)session.getAttribute("gh");
-            	for(giohangbean h: gh.ds) {
-            		ctbo.Them(h.getMasach(), h.getSoluong(), maxhd);
+            	giohangbo gh = (giohangbo)session.getAttribute("gio");
+            	if(gh!=null) {
+            		hoadonbo hdbo = new hoadonbo();
+                	chitiethoadonbo ctbo = new chitiethoadonbo();
+                	hdbo.Them(kh.getMakh());
+                	long maxhd = hdbo.MaxHD();
+                	for(giohangbean h: gh.ds) {
+                		ctbo.ThemCTHD(h.getMasach(), h.getSoluong(), maxhd);
+                	}
+                	//Xóa giỏ hàng
+                	session.removeAttribute("gio");
+                	response.sendRedirect("LichSuMua.jsp");
             	}
-            	//Xóa giỏ hàng
-            	session.removeAttribute("gh");
-            	response.sendRedirect("LichSuMuaController");
             }
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			System.out.println(e.getMessage());
 			response.sendRedirect("TrangLoi.jsp");
 		}
 	}

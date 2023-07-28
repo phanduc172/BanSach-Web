@@ -1,3 +1,4 @@
+<%@page import="bean.khachhangbean"%>
 <%@page import="bean.giohangbean"%>
 <%@page import="bo.giohangbo"%>
 <%@page import="java.util.ArrayList"%>
@@ -22,6 +23,7 @@
 <body>
 
 	<%
+		khachhangbean khachhang = (khachhangbean) session.getAttribute("ktdn");
 		giohangbo gh = (giohangbo) session.getAttribute("gio");
 		if(gh==null) {
 			gh = new giohangbo();
@@ -67,7 +69,7 @@
                 <li><a href="LichSuMuaController">Lịch sử mua hàng</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-	      <% if (session.getAttribute("dn") == null) { %>
+	      <% if (session.getAttribute("dn")==null) { %>
 		    <li class="modal-title">
 	      	<!-- Trigger the modal with a button -->
 			<button style="background: none;border: none;color: #9d9d9d;padding: 15px;" type="button" class="" data-toggle="modal" data-target="#myModalRegister">
@@ -141,7 +143,7 @@
 		      </div>
 	      </li>
 	      <% } else { %>
-	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=session.getAttribute("dn")%> </a></li>
+	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=khachhang.getHoten()%> </a></li>
 	     	 <li><a href="DangXuat.jsp"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất </a></li>
       	<%}%>
 	    </ul>
@@ -172,39 +174,38 @@
 					</table>
 				</td>
 			<td class="noidung" width="700" align="center" valign="top">
-				<h4>Lịch sử mua hàng</h4>
-			    <table border="1">
-			        <tr>
-			            <th width="100px"> Mã CTHĐ</th>
-			            <th width="100px">Họ tên</th>
-			            <th width="100px">Tên sách</th>
-			            <th width="100px">Giá</th>
-			            <th width="100px">Số lượng mua</th>
-			            <th width="100px">Ngày mua</th>
-			        </tr>
-					<%
-            // Lấy danh sách lịch sử mua hàng từ request
-		            ArrayList<bean.lichsumuabean> listLsm = (ArrayList<bean.lichsumuabean>) request.getAttribute("listLsm");
-		            if (listLsm != null) {
-		                for (bean.lichsumuabean lsm : listLsm) {
-		        %>
-		        <tr>
-		            <td><%= lsm.getMacthd() %></td>
-		            <td><%= lsm.getHoten() %></td>
-		            <td><%= lsm.getTensach() %></td>
-		            <td><%= lsm.getGia() %></td>
-		            <td><%= lsm.getSoluongmua() %></td>
-		            <td><%= lsm.getNgaymua() %></td>
-		        </tr>
-		        <%
-		                }
-		            } else {
-		        %>
-		        <tr>
-		            <td colspan="6">Không có lịch sử mua hàng</td>
-		        </tr>
-		        <% } %>
-			    </table>
+				<h4 class="mt-3">Lịch sử mua hàng</h4>
+		        <table class="table table-bordered table-hover">
+		            <thead>
+		                <tr>
+		                    <th>Mã CTHĐ</th>
+		                    <th>Họ tên</th>
+		                    <th>Tên sách</th>
+		                    <th>Giá</th>
+		                    <th>Số lượng mua</th>
+		                    <th>Ngày mua</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <% ArrayList<lichsumuabean> listLsm = (ArrayList<lichsumuabean>) request.getAttribute("listLsm"); %>
+		                <% if (listLsm != null && !listLsm.isEmpty()) { %>
+		                    <% for (lichsumuabean lsm : listLsm) { %>
+		                        <tr>
+		                            <td><%= lsm.getMacthd() %></td>
+		                            <td><%= lsm.getHoten() %></td>
+		                            <td><%= lsm.getTensach() %></td>
+		                            <td><%= lsm.getGia() %></td>
+		                            <td><%= lsm.getSoluongmua() %></td>
+		                            <td><%= lsm.getNgaymua() %></td>
+		                        </tr>
+		                    <% } %>
+		                <% } else { %>
+		                    <tr>
+		                        <td colspan="6">Không có lịch sử mua hàng</td>
+		                    </tr>
+		                <% } %>
+		            </tbody>
+		        </table>
 			</td>
 
 			<td class="timkiem" width="200" align="center" valign="top">

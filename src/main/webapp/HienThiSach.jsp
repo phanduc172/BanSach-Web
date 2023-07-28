@@ -1,3 +1,4 @@
+<%@page import="bean.khachhangbean"%>
 <%@page import="bo.giohangbo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="bean.sachbean"%>
@@ -22,9 +23,12 @@
 		    String tb = request.getParameter("tb");
 		    if (tb != null && tb.equals("DangNhapSai")) {
 		        // Sử dụng JavaScript để hiển thị alert
-		        out.println("<script>alert('Đăng nhập sai');</script>");
+		        out.println("<script>alert('Đăng nhập không thành công!');</script>");
 		    }
 		%>
+		<%
+        khachhangbean khachhang = (khachhangbean) session.getAttribute("ktdn");
+   		 %>
 	<%
 	giohangbo gh = (giohangbo) session.getAttribute("gio");
 	if(gh==null) {
@@ -59,7 +63,7 @@
                 <li class="active"><a href="SachController">Trang chủ</a></li>
                 <li><a href="GioHangController">Giỏ hàng <span style="color:red;">(<%=gh.TongSLSach()%>)</span></a></li>
                 <li><a href="XacNhanController">Xác nhận đặt mua</a></li>
-                <li><a href="LichSuMuaController">Lịch sử mua hàng</a></li>
+                <li><a href="LichSuMua.jsp">Lịch sử mua hàng</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 	      <% if (session.getAttribute("dn") == null) { %>
@@ -134,7 +138,7 @@
 		      </div>
 	      </li>
 	      <% } else { %>
-	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=session.getAttribute("dn")%> </a></li>
+	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=khachhang.getHoten()%> </a></li>
 	     	 <li><a href="DangXuat.jsp"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất </a></li>
       	<%}%>
 	    </ul>
@@ -183,10 +187,7 @@
 							<tr class="col-sm-6 item-book" align="center">
 								<td width="210" height="380">
 									<img width="180"  alt="" src="<%=sach.getAnh()%>"> <br>
-
-									Tên sách: <a href="SachController?ml=<%=sach.getMasach()%>">
-										<%=sach.getTensach()%><br>
-									</a>
+									Tên sách: <b><%=sach.getTensach()%></b><br>
 									<a href="GioHangController?ms=<%=sach.getMasach()%>&ts=<%=sach.getTensach()%>&gia=<%=sach.getGia()%>">
 									<img src="mua.jpg"> </a>
 									<br>

@@ -10,6 +10,7 @@ public class hoadonbo {
 	}
 
 	public long MaxHD() throws Exception {
+		long maxhd = hddao.MaxHD();
 		return hddao.MaxHD();
 	}
 }

@@ -1,18 +1,17 @@
 package bo;
 
 import java.util.List;
-
 import bean.lichsumuabean;
 import dao.lichsumuadao;
 
 public class lichsumuabo {
-    private lichsumuadao lichSuMuaDao;
+    private lichsumuadao lsmDao;
 
     public lichsumuabo() {
-        lichSuMuaDao = new lichsumuadao();
+        lsmDao = new lichsumuadao();
     }
 
     public List<lichsumuabean> getLichSuMua(long makh) throws Exception {
-        return lichSuMuaDao.getLichSuMua(makh);
+        return lsmDao.getLichSuMua(makh);
     }
 }

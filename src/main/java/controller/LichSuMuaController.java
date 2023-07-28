@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.lichsumuabean;
-import dao.lichsumuadao;
+import bo.lichsumuabo;
 
 @WebServlet("/LichSuMuaController")
 public class LichSuMuaController extends HttpServlet {
@@ -33,8 +33,8 @@ public class LichSuMuaController extends HttpServlet {
             long makh = (long) session.getAttribute("makh");
 
             // Lấy danh sách lịch sử mua hàng từ database
-            lichsumuadao lsmDao = new lichsumuadao();
-            List<lichsumuabean> listLsm = lsmDao.getLichSuMua(makh);
+            lichsumuabo lsmBo = new lichsumuabo();
+            List<lichsumuabean> listLsm = lsmBo.getLichSuMua(makh);
 
             // Đặt danh sách lịch sử mua hàng vào thuộc tính của request
             request.setAttribute("listLsm", listLsm);
@@ -53,4 +53,3 @@ public class LichSuMuaController extends HttpServlet {
         doGet(request, response);
     }
 }
-

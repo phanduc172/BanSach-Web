@@ -1,43 +1,38 @@
 package bean;
 
 public class lichsumuabean {
+	private long macthd;
 	private long makh;
-    private long macthd;
     private String hoten;
     private String tensach;
     private long gia;
     private long soluongmua;
     private String ngaymua;
-
-	public long getMakh() {
-		return makh;
-	}
-
-	public void setMakh(long makh) {
-		this.makh = makh;
-	}
-
 	public lichsumuabean() {
 		super();
 	}
-
-	public lichsumuabean(long makh, long macthd, String hoten, String tensach, long gia, long soluongmua,
+	public lichsumuabean(long macthd, long makh, String hoten, String tensach, long gia, long soluongmua,
 			String ngaymua) {
 		super();
-		this.makh = makh;
 		this.macthd = macthd;
+		this.makh = makh;
 		this.hoten = hoten;
 		this.tensach = tensach;
 		this.gia = gia;
 		this.soluongmua = soluongmua;
 		this.ngaymua = ngaymua;
 	}
-
 	public long getMacthd() {
 		return macthd;
 	}
 	public void setMacthd(long macthd) {
 		this.macthd = macthd;
+	}
+	public long getMakh() {
+		return makh;
+	}
+	public void setMakh(long makh) {
+		this.makh = makh;
 	}
 	public String getHoten() {
 		return hoten;
@@ -69,5 +64,6 @@ public class lichsumuabean {
 	public void setNgaymua(String ngaymua) {
 		this.ngaymua = ngaymua;
 	}
+
 
 }

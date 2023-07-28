@@ -1,3 +1,4 @@
+<%@page import="bean.khachhangbean"%>
 <%@page import="bean.giohangbean"%>
 <%@page import="bo.giohangbo"%>
 <%@page import="java.util.ArrayList"%>
@@ -38,6 +39,7 @@
 	%>
 
 	<%
+		khachhangbean khachhang = (khachhangbean) session.getAttribute("ktdn");
 		giohangbo ghbo = (giohangbo) session.getAttribute("gio");
 
 		// Kiểm tra nếu có thông tin sản phẩm được thêm vào giỏ hàng từ trang HienThiSach.jsp
@@ -140,7 +142,7 @@
 		      </div>
 	      </li>
 	      <% } else { %>
-	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=session.getAttribute("dn")%> </a></li>
+	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=khachhang.getHoten()%> </a></li>
 	     	 <li><a href="DangXuat.jsp"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất </a></li>
       	<%}%>
 	    </ul>

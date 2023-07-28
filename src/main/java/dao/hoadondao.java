@@ -12,7 +12,7 @@ public class hoadondao {
 		String sql = "INSERT INTO hoadon(makh,NgayMua,damua) VALUES(?,?,?)";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		cmd.setLong(1,makh);
-		//Lấy ngày hien dại
+		//Lấy ngày hien tại
 		Date n = new Date();
 		SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
 		String nn = dd.format(n);
