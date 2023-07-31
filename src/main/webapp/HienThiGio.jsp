@@ -143,7 +143,7 @@
 	      </li>
 	      <% } else { %>
 	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=khachhang.getHoten()%> </a></li>
-	     	 <li><a href="DangXuat.jsp"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất </a></li>
+	     	 <li><a href="DangXuatController"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất </a></li>
       	<%}%>
 	    </ul>
         </div>

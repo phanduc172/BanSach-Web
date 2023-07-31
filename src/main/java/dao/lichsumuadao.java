@@ -11,7 +11,7 @@ public class lichsumuadao {
     public List<lichsumuabean> getLichSuMua(long makh) throws Exception {
         KetNoidao kn = new KetNoidao();
         kn.KetNoi();
-        String sql = "select * from VLichSuMua where makh = ?";
+        String sql = "select * from VLichSuMua where makh = ? order by MaChiTietHD desc" ;
         PreparedStatement cmd = kn.cn.prepareStatement(sql);
         cmd.setLong(1, makh);
         ResultSet rs = cmd.executeQuery();

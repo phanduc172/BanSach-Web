@@ -8,8 +8,9 @@
 </head>
 <body>
 	<%
-		session.removeAttribute("dn") ;
-		response.sendRedirect("SachController");
+// 		session.removeAttribute("dn") ;
+// 		response.sendRedirect("SachController");
+// 		request.removeAttribute("listLsm");
 	%>
 </body>
 </html>

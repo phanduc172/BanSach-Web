@@ -1,7 +1,8 @@
 package controller;
 
 import java.io.IOException;
-import java.util.Objects;
+
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,9 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import bean.giohangbean;
 import bean.khachhangbean;
+import bean.lichsumuabean;
 import bo.chitiethoadonbo;
 import bo.giohangbo;
 import bo.hoadonbo;
+import bo.lichsumuabo;
 
 /**
  * Servlet implementation class XacNhanController
@@ -43,7 +46,7 @@ public class XacNhanController extends HttpServlet {
 
             khachhangbean kh = (khachhangbean) session.getAttribute("ktdn");
             if(kh==null) {
-    			response.sendRedirect("SachController");
+            	response.sendRedirect("SachController");
             } else {
             	giohangbo gh = (giohangbo)session.getAttribute("gio");
             	if(gh!=null) {
@@ -56,6 +59,11 @@ public class XacNhanController extends HttpServlet {
                 	}
                 	//Xóa giỏ hàng
                 	session.removeAttribute("gio");
+                	// Khai báo và khởi tạo biến lsmBo
+                    lichsumuabo lsmbo = new lichsumuabo();
+                	 // Đưa danh sách lịch sử mua hàng vào thuộc tính request để hiển thị trên JSP
+                	List<lichsumuabean> listLsm = lsmbo.getLichSuMua(kh.getMakh());
+                    session.setAttribute("listLsm", listLsm);
                 	RequestDispatcher rd = request.getRequestDispatcher("LichSuMua.jsp");
                     rd.forward(request, response);
             	}
@@ -64,7 +72,7 @@ public class XacNhanController extends HttpServlet {
 			// TODO: handle exception
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			response.sendRedirect("TrangLoi.jsp");
+			response.sendRedirect("LichSuMuaController");
 		}
 	}
 

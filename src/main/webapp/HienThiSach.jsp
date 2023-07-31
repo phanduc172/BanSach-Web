@@ -14,7 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Bán sách</title>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -144,7 +144,7 @@
 	      </li>
 	      <% } else { %>
 	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=khachhang.getHoten()%> </a></li>
-	     	 <li><a href="DangXuat.jsp"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất </a></li>
+	     	 <li><a href="DangXuatController"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất </a></li>
       	<%}%>
 	    </ul>
         </div>
@@ -154,7 +154,7 @@
 			<tr>
 				<td class="danhmuc"width="200" align="center" valign="top">
 				<h4 class="mt-3">Hiển thị danh mục</h4>
-					<table class="table table-dark table-hover">
+					<table class="ml-0 table table-dark table-hover">
 						<%ArrayList<loaibean> dsloai = (ArrayList<loaibean>)request.getAttribute("dsloai");%>
 						<%if (request.getAttribute("dsloai") != null) {
 						  dsloai = (ArrayList<loaibean>) request.getAttribute("dsloai");
@@ -189,9 +189,9 @@
 
 						<%ArrayList<sachbean> dsach = (ArrayList)request.getAttribute("dssach");%>
 						<%for(sachbean sach: dsach) { %>
-							<tr class="col-sm-6 item-book" align="center">
+							<tr class="col-6 col-sm-4 item-book" align="center">
 								<td width="210" height="380">
-									<img width="180"  alt="" src="<%=sach.getAnh()%>"> <br>
+									<img width="150"  alt="" src="<%=sach.getAnh()%>"> <br>
 									Tên sách: <b><%=sach.getTensach()%></b><br>
 									<a href="GioHangController?ms=<%=sach.getMasach()%>&ts=<%=sach.getTensach()%>&gia=<%=sach.getGia()%>">
 									<img src="mua.jpg"> </a>

@@ -10,6 +10,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 	<%
 		khachhangbean khachhang = (khachhangbean) session.getAttribute("ktdn");
 		giohangbo gh = (giohangbo) session.getAttribute("gio");
@@ -133,7 +133,7 @@
 	      </li>
 	      <% } else { %>
 	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=khachhang.getHoten()%> </a></li>
-	     	 <li><a href="DangXuat.jsp"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất </a></li>
+	     	 <li><a href="DangXuatController"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất </a></li>
       	<%}%>
 	    </ul>
         </div>
@@ -176,7 +176,7 @@
 		                </tr>
 		            </thead>
 		            <tbody>
-		                <% ArrayList<lichsumuabean> listLsm = (ArrayList<lichsumuabean>) request.getAttribute("listLsm"); %>
+		               <%ArrayList<lichsumuabean> listLsm = (ArrayList<lichsumuabean>) session.getAttribute("listLsm");%>
 		                <% if (listLsm != null && !listLsm.isEmpty()) { %>
 		                    <% for (lichsumuabean lsm : listLsm) { %>
 		                        <tr>
