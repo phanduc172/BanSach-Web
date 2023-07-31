@@ -25,6 +25,7 @@ public class giohangbo {
 	      }
 	  }
 
+
 	public void Sua(String masach, long slm) {
 		int n =ds.size();
 	    for (int i = 0 ; i < n ; i++ ) {
@@ -36,7 +37,6 @@ public class giohangbo {
 		    }
 	    }
 	}
-
 
 	public long TongTien() {
 		long s = 0;

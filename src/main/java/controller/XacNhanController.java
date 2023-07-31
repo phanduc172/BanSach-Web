@@ -61,7 +61,6 @@ public class XacNhanController extends HttpServlet {
                 	session.removeAttribute("gio");
                 	// Khai báo và khởi tạo biến lsmBo
                     lichsumuabo lsmbo = new lichsumuabo();
-                	 // Đưa danh sách lịch sử mua hàng vào thuộc tính request để hiển thị trên JSP
                 	List<lichsumuabean> listLsm = lsmbo.getLichSuMua(kh.getMakh());
                     session.setAttribute("listLsm", listLsm);
                 	RequestDispatcher rd = request.getRequestDispatcher("LichSuMua.jsp");

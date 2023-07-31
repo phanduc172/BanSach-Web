@@ -203,8 +203,8 @@
 						<td align="right" colspan="7"> <b>Tổng tiền: </b><%=gh.TongTien() %></td>
 					</tr>
 				</table>
-				<form style="display: inline-block;" class="btn-form" method="" action="XoaChonController">
-					<input class="btn btn-primary" type="submit" name="btnxc" value="Xóa chọn">
+				<form style="display: inline-block;" class="btn-form" onsubmit="return xoaChon()" method="post" action="XoaChonController">
+				    <input class="btn btn-primary" type="submit" name="btnxc" value="Xóa chọn">
 				</form>
 				<form style="display: inline-block;" class="btn-form" method="" action="XoaTatCaController">
 					<input class="btn btn-primary" type="submit" name="btnxoaall" value="Xóa tất cả">
@@ -223,6 +223,39 @@
 			</td>
 		</tr>
 	</table>
+	<script>
+	function xoaChon() {
+	    var maSachXoa = [];
+	    var checkboxes = document.getElementsByName("checkdel");
+	    for (var i = 0; i < checkboxes.length; i++) {
+	        if (checkboxes[i].checked) {
+	            maSachXoa.push(checkboxes[i].value);
+	        }
+	    }
+
+	    if (maSachXoa.length === 0) {
+	        alert("Vui lòng chọn ít nhất một sản phẩm để xóa!");
+	        return false;
+	    }
+
+	    var form = document.createElement("form");
+	    form.method = "post";
+	    form.action = "XoaChonController";
+
+	    for (var i = 0; i < maSachXoa.length; i++) {
+	        var input = document.createElement("input");
+	        input.type = "hidden";
+	        input.name = "msach";
+	        input.value = maSachXoa[i];
+	        form.appendChild(input);
+	    }
+
+	    document.body.appendChild(form);
+	    form.submit();
+
+	    return false;
+	}
+	</script>
 
 </body>
 </html>
