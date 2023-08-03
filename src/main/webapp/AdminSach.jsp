@@ -1,42 +1,20 @@
-<%@page import="bean.khachhangbean"%>
-<%@page import="bean.giohangbean"%>
-<%@page import="bo.giohangbo"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="bean.sachbean"%>
-<%@page import="bo.sachbo"%>
 <%@page import="bo.loaibo"%>
 <%@page import="bean.loaibean"%>
-<%@ page import="bean.lichsumuabean" %>
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.lang.reflect.Array"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Bán sách</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<title>Quản lý loại</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<%
-		khachhangbean khachhang = (khachhangbean) session.getAttribute("ktdn");
-		giohangbo gh = (giohangbo) session.getAttribute("gio");
-		if(gh==null) {
-			gh = new giohangbo();
-			session.setAttribute("gio",gh);
-		}
-	%>
-	<%
-		giohangbo ghbo = (giohangbo) session.getAttribute("gio");
-		// Kiểm tra nếu có thông tin sản phẩm được thêm vào giỏ hàng từ trang HienThiSach.jsp
-		String masach = request.getParameter("ms");
-		String tensach = request.getParameter("ts");
-		String gia = request.getParameter("gia");
-	%>
 
 	<nav class="navbar navbar-inverse">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -47,15 +25,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="SachController" class="navbar-brand">Nhà sách</a>
+            <a href="AdminLoaiController" class="navbar-brand">Nhà sách</a>
         </div>
         <!-- Collection of nav links, forms, and other content for toggling -->
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="SachController">Trang chủ</a></li>
-                <li><a href="GioHangController">Giỏ hàng <span style="color:red;">(<%=gh.TongSLSach()%>)</span></a></li>
-                <li><a href="XacNhanController">Xác nhận đặt mua</a></li>
-                <li><a href="LichSuMuaController">Lịch sử mua hàng</a></li>
+                <li class="active"><a href="AdminLoaiController">Quản lý loại</a></li>
+                <li><a href="AdminSachController">Quản lý sách <span style="color:red;"></span></a></li>
+                <li><a href="AdminXacNhanController">Xác nhận hóa đơn</a></li>
+                <li><a href="AdminDanhSachController">Khách hàng đã chuyển tiền</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 	      <% if (session.getAttribute("dn")==null) { %>
@@ -132,80 +110,76 @@
 		      </div>
 	      </li>
 	      <% } else { %>
-	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%=khachhang.getHoten()%> </a></li>
+	     	 <li><a href=""><span class="glyphicon glyphicon-user"></span> Xin chào: <%%> </a></li>
 	     	 <li><a href="DangXuatController"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất </a></li>
       	<%}%>
 	    </ul>
         </div>
     </nav>
 
-		<table border="1" align="center">
-		<tr>
-			<td class="danhmuc"width="200" align="center" valign="top">
-				<h4 class="mt-3">Hiển thị danh mục</h4>
-					<table class="table table-dark table-hover">
-						<%
-						loaibo lbo = new loaibo();
-						ArrayList<loaibean> dsloai = lbo.getloai();
-						%>
-						<%if (request.getAttribute("dsloai") != null) {
-						  dsloai = (ArrayList<loaibean>) request.getAttribute("dsloai");
-						}%>
-						<%for(loaibean loai: dsloai) {%>
-							<tr>
-								<td>
-									<a href="SachController?ml=<%=loai.getMaloai()%>">
-										<%=loai.getTenloai()%>
-									</a>
-								</td>
-							</tr>
-						<%}%>
-					</table>
-				</td>
-			<td class="noidung" width="700" align="center" valign="top">
-				<h4 class="mt-3">Lịch sử mua hàng</h4>
-		        <table class="table table-bordered table-hover">
-		            <thead>
-		                <tr>
-		                    <th>Mã CTHĐ</th>
-		                    <th>Họ tên</th>
-		                    <th>Tên sách</th>
-		                    <th>Giá</th>
-		                    <th>Số lượng mua</th>
-		                    <th>Ngày mua</th>
-		                </tr>
-		            </thead>
-		            <tbody>
-		               <%ArrayList<lichsumuabean> listLsm = (ArrayList<lichsumuabean>) session.getAttribute("listLsm");%>
-		                <% if (listLsm != null && !listLsm.isEmpty()) { %>
-		                    <% for (lichsumuabean lsm : listLsm) { %>
-		                        <tr>
-		                            <td><%= lsm.getMacthd() %></td>
-		                            <td><%= lsm.getHoten() %></td>
-		                            <td><%= lsm.getTensach() %></td>
-		                            <td><%= lsm.getGia() %></td>
-		                            <td><%= lsm.getSoluongmua() %></td>
-		                            <td><%= lsm.getNgaymua() %></td>
-		                        </tr>
-		                    <% } %>
-		                <% } else { %>
-		                    <tr>
-		                        <td colspan="6">Không có lịch sử mua hàng</td>
-		                    </tr>
-		                <% } %>
-		            </tbody>
-		        </table>
-			</td>
+	<div class="container">
+	<form action="AdminSachController" method="post" class="form-inline d-flex justify-content-between align-items-center">
+	    <div class="form-group">
+	        <label for="txtmasach">Mã sách:</label>
+	        <input name="txtmasach" type="text" class="form-control">
+	    </div>
+	    <div class="form-group">
+	        <label for="txttensach">Tên sách:</label>
+	        <input name="txttensach" type="text" class="form-control">
+	    </div>
+	    <div class="form-group">
+	        <label for="txtgia">Giá:</label>
+	        <input name="txtgia" type="text" class="form-control">
+	    </div> <br> <br>
+	    <div class="form-group">
+	        <label for="txtsoluong">Số lượng:</label>
+	        <input name="txtsoluong" type="text" class="form-control">
+	    </div>
+	    <div class="form-group">
+	        <label for="txtanh">Ảnh:</label>
+	        <input name="txtanh" type="text" class="form-control">
+	    </div>
+	    <div class="form-group">
+	        <label for="txtmaloai">Tên loại:</label>
+	        <input name="txtmaloai" type="text" class="form-control">
+	    </div> <br> <br>
+	    <div class="form-group">
+	        <input class="btn btn-primary" name="butaddsach" type="submit" value="Thêm">
+	    </div>
+	    <div class="form-group">
+	        <input class="btn btn-primary" name="butupdatesach" type="submit" value="Cập nhật">
+	    </div>
+	</form>
+	</div>
 
-			<td class="timkiem" width="200" align="center" valign="top">
-					<h4>Tìm kiếm</h4>
-					<form method="post" action="SachController">
-						<input style="width: 90%;" type="text" name="txttim" class="form-control" placeholder="Nhập sách cần tìm kiếm"> <br>
-						<input type="submit" name="but1" value="Gửi">
-					</form>
-			</td>
-		</tr>
-	</table>
+	<h4 align="center"><b>DANH SÁCH CÁC SÁCH</b></h4>
+	<div class="container">
+		<table border='1' width="900" align="center" class="p-3 mt-5 table table-hover">
+			<tr style="font-weight: bold;">
+				<td>Mã sách</td>
+				<td>Tên sách</td>
+				<td>Giá</td>
+				<td>Số lượng</td>
+				<td>Ảnh</td>
+				<td>Mã loại</td>
+				<td>Chọn</td>
+				<td>Xóa</td>
+			</tr>
+		<c:forEach var="sach" items="${dssach}" >
+			<tr>
+				<td>${sach.getMasach()}</td>
+				<td>${sach.getTensach()}</td>
+				<td>${sach.getGia()}</td>
+				<td>${sach.getSoluong()}</td>
+				<td>${sach.getAnh()}</td>
+				<td>${sach.getMaloai()}</td>
+				<td> <a href="AdminSachController?ms=${sach.getMasach()}&tab=chonsach">Chọn</a> </td>
+				<td><a href="AdminSachController?ms=${sach.getMasach()}&tab=xoasach">Xóa</a></td>
+
+			</tr>
+		</c:forEach>
+		</table>
+	</div>
 
 </body>
 </html>

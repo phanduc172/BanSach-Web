@@ -174,19 +174,37 @@
 				<td class="noidung" width="700" align="center" valign="top">
 					<table class="table table-dark table-hover row">
 					<h4 class="mt-3">Hiển thị sách</h4>
-					<%
-// 						response.setCharacterEncoding("utf-8");
-// 						request.setCharacterEncoding("utf-8");
-// 						sachbo sbo = new sachbo();
-// 						ArrayList<sachbean> ds = sbo.getsach();
-// 						String ml = request.getParameter("ml");
-// 						String key = request.getParameter("txttim");
-// 						if(ml!=null) //Chọn tên loại
-// 							ds=sbo.timMa(ml);
-// 						else
-// 							if(key!=null)
-// 								ds=sbo.tim(key); %>
-
+					<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 97%;">
+					    <ol class="carousel-indicators">
+					      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					      <li data-target="#myCarousel" data-slide-to="1"></li>
+					      <li data-target="#myCarousel" data-slide-to="2"></li>
+   					      <li data-target="#myCarousel" data-slide-to="3"></li>
+					    </ol>
+					    <div class="carousel-inner">
+					      <div class="item active">
+					        <img src="image_sach/bg1.jpg" alt="" style="width:100%;">
+					      </div>
+					      <div class="item">
+					        <img src="image_sach/bg2.jpg" alt="" style="width:100%;">
+					      </div>
+					      <div class="item">
+					        <img src="image_sach/bg3.jpg" alt="" style="width:100%;">
+					      </div>
+					      <div class="item">
+					        <img src="image_sach/bg4.jpg" alt="" style="width:100%;">
+					      </div>
+					    </div>
+					    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+					      <span class="glyphicon glyphicon-chevron-left"></span>
+					      <span class="sr-only">Previous</span>
+					    </a>
+					    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+					      <span class="glyphicon glyphicon-chevron-right"></span>
+					      <span class="sr-only">Next</span>
+					    </a>
+					  </div>
+					  <hr>
 						<%ArrayList<sachbean> dsach = (ArrayList)request.getAttribute("dssach");%>
 						<%for(sachbean sach: dsach) { %>
 							<tr class="col-6 col-sm-4 item-book" align="center">

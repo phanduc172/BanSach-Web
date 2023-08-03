@@ -34,6 +34,15 @@ public class sachbo {
 		return tam;
 	}
 
-	//Viết hàm thêm các mặt hàng vào giỏ hàng
+	public int themSach(String masach, String tensach, String tacgia, long gia, long soluong, String anh, String maloai) throws Exception {
+		return sdao.themSach(masach, tensach, tacgia, gia, soluong, anh, maloai);
+	}
 
+	public int xoaSach(String masach) throws Exception {
+	    return sdao.xoaSach(masach);
+	}
+
+	public int suaSach(String masach, String tensach, String tacgia, long gia, long soluong, String anh, String maloai) throws Exception {
+		return sdao.suaSach(masach, tensach, tacgia, gia, soluong, anh, maloai);
+	}
 }

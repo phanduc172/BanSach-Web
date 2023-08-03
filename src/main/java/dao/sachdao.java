@@ -36,4 +36,54 @@ public class sachdao {
 		kn.cn.close();
 		return ds;
 	}
+
+	public int themSach(String masach, String tensach, String tacgia, long gia, long soluong, String anh, String maloai) throws Exception {
+		KetNoidao kn = new KetNoidao();
+		kn.KetNoi();
+		String sql = "insert into sach(masach,tensach,tacgia,gia,soluong,anh,maloai) values (?,?,?,?,?,?,?)";
+	    PreparedStatement cmd = kn.cn.prepareStatement(sql);
+	    cmd.setString(1, masach);
+	    cmd.setString(2, tensach);
+	    cmd.setString(3, tacgia);
+	    cmd.setLong(4,gia);
+	    cmd.setLong(5, soluong);
+	    cmd.setString(6, anh);
+	    cmd.setString(7, maloai);
+		int kq = cmd.executeUpdate();
+		cmd.close();
+		kn.cn.close();
+		return kq;
+	}
+
+	public int xoaSach(String masach) throws Exception {
+	    KetNoidao kn = new KetNoidao();
+	    kn.KetNoi();
+	    String sql = "delete from sach where masach = ?";
+	    PreparedStatement cmd = kn.cn.prepareStatement(sql);
+	    cmd.setString(1, masach);
+	    int kq = cmd.executeUpdate();
+	    cmd.close();
+	    kn.cn.close();
+	    return kq;
+	}
+
+
+	public int suaSach(String masach, String tensach, String tacgia, long gia, long soluong, String anh, String maloai) throws Exception {
+	    KetNoidao kn = new KetNoidao();
+	    kn.KetNoi();
+	    String sql = "update sach set tensach=?, tacgia=?, gia=?, soluong=?, anh=?, maloai=? where masach=?";
+	    PreparedStatement cmd = kn.cn.prepareStatement(sql);
+	    cmd.setString(1, tensach);
+	    cmd.setString(2, tacgia);
+	    cmd.setLong(3, gia);
+	    cmd.setLong(4,soluong);
+	    cmd.setString(5, anh);
+	    cmd.setString(6, maloai);
+	    cmd.setString(7, masach);
+	    int kq = cmd.executeUpdate();
+	    cmd.close();
+	    kn.cn.close();
+	    return kq;
+	}
+
 }
